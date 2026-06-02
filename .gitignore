@@ -1,0 +1,11 @@
+build_release/
+
+build_debug/
+
+*.exe
+
+*.o
+
+.vscode/
+
+test/
