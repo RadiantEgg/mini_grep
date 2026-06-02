@@ -5,6 +5,7 @@
 int main(int argc, char **argv)
 {
     Config cfg;
+    init_config(&cfg);
 
     parse_args(argc, argv, &cfg);
 

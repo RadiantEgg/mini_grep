@@ -10,4 +10,6 @@ typedef struct {
     int file_count;
 } Config;
 
+void init_config(Config *cfg);
+
 #endif
