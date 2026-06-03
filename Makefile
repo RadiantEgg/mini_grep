@@ -5,7 +5,10 @@ APP_BUILD = build/app
 TEST_BUILD = build/test
 
 APP_TARGET = build/mini_grep
-TEST_TARGET = build/test_args
+
+TEST_ARGS = build/test_args
+TEST_MATCH = build/test_match
+
 
 # 正式程序源文件
 APP_SRC = \
@@ -14,62 +17,49 @@ APP_SRC = \
 	src/file.c \
 	src/match.c \
 	src/config.c \
-	src/output.c 
+	src/output.c
 
-# 测试程序自己的源文件
-TEST_SRC = \
-	test/test_args.c 
+APP_OBJ = $(APP_SRC)
 
-# 测试程序需要链接的公共模块
-COMMON_SRC = \
-	src/config.c \
-	src/args.c
 
-APP_OBJ = $(APP_SRC:src/%.c=$(APP_BUILD)/%.o)
-
-COMMON_OBJ = $(COMMON_SRC:src/%.c=$(TEST_BUILD)/%.o)
-
-TEST_OBJ = $(TEST_SRC:test/%.c=$(TEST_BUILD)/%.o)
-
+# 默认目标
 all: $(APP_TARGET)
 
-# 正式程序
 
-$(APP_TARGET): $(APP_OBJ)
+$(APP_TARGET): $(APP_SRC)
+	@mkdir -p build
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(APP_BUILD)/%.o: src/%.c
-	@mkdir -p $(APP_BUILD)
-	$(CC) $(CFLAGS) -c $< -o $@
 
-# 测试程序
-
-test: $(TEST_TARGET)
-
-$(TEST_TARGET): $(COMMON_OBJ) $(TEST_OBJ)
+# 测试: args
+$(TEST_ARGS): test/test_args.c src/args.c src/config.c
+	@mkdir -p build
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(TEST_BUILD)/%.o: src/%.c
-	@mkdir -p $(TEST_BUILD)
-	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TEST_BUILD)/%.o: test/%.c
-	@mkdir -p $(TEST_BUILD)
-	$(CC) $(CFLAGS) -c $< -o $@
+# 测试: match
+$(TEST_MATCH): test/test_match.c src/match.c src/config.c
+	@mkdir -p build
+	$(CC) $(CFLAGS) $^ -o $@
+	
+
+# 测试总入口
+test: $(TEST_ARGS) $(TEST_MATCH)
+
 
 # 运行
-
 run: $(APP_TARGET)
 	./$(APP_TARGET)
 
-run_test: $(TEST_TARGET)
-	./$(TEST_TARGET)
+run_test_args: $(TEST_ARGS)
+	./$(TEST_ARGS)
+
+run_test_match: $(TEST_MATCH)
+	./$(TEST_MATCH)
+
 
 # 清理
-
-clean: 
+clean:
 	rm -rf build
 
-.PHONY: all test run run_test clean
-
-
+.PHONY: all test run run_test_args run_test_match clean

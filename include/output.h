@@ -6,8 +6,6 @@
 void output_line(Config *cfg,
                  char *filename,
                  long lineno,
-                 char *line,
-                 int match,
-                 int multi_file);
+                 char *line);
 
 #endif
