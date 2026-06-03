@@ -1,7 +1,3 @@
-build_release/
-
-build_debug/
-
 build/
 
 *.exe

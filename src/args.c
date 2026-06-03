@@ -1,18 +1,19 @@
+#include <stdio.h>
 #include "args.h"
 
 void parse_args(int argc, char **argv, Config *cfg)
 {
-    int c, i = 0;
+    char c;
 
     while (--argc > 0) {
         if ((*++argv)[0] == '-') 
-            while (c = *++argv[0])
+            while ((c = *++argv[0]))
                 switch(c) {
                 case 'n':
-                    cfg->number = 0;
+                    cfg->number = 1;
                     break;
                 case 'x':
-                    cfg->except = 0;
+                    cfg->except = 1;
                     break;
                 default:
                     printf("find: illegal option %c\n", c);
@@ -29,8 +30,7 @@ void parse_args(int argc, char **argv, Config *cfg)
     // }
     cfg->pattern = *argv;
 
-    while (*++argv) {
-        cfg->file_count++;
-        cfg->files[i++] = *argv;
-    }
+    cfg->file_count = argc - 1;
+    cfg->files = ++argv;
+
 }

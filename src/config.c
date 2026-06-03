@@ -1,5 +1,6 @@
 #include "config.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void init_config(Config* cfg)
 {

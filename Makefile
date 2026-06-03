@@ -39,6 +39,7 @@ $(APP_TARGET): $(APP_OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(APP_BUILD)/%.o: src/%.c
+	@mkdir -p $(APP_BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # 测试程序
@@ -49,9 +50,11 @@ $(TEST_TARGET): $(COMMON_OBJ) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(TEST_BUILD)/%.o: src/%.c
+	@mkdir -p $(TEST_BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TEST_BUILD)/%.o: test/%.c
+	@mkdir -p $(TEST_BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # 运行
