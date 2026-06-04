@@ -15,6 +15,9 @@ void parse_args(int argc, char **argv, Config *cfg)
                 case 'x':
                     cfg->except = 1;
                     break;
+                case 'i':
+                    cfg->ignore_case = 1;
+                    break;
                 default:
                     printf("find: illegal option %c\n", c);
                     cfg->file_count = -1;
