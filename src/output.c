@@ -20,7 +20,6 @@ static void build_prefix(Config *cfg, char *prefix, char *filename, long lineno)
 void output_line(Config *cfg, char *filename, long lineno, char *line)
 {
     char *separator = ":";
-    build_separator(&separator);
     char prefix[PREFIX_MAX_LENGTH];
     build_prefix(cfg, &prefix, filename, lineno);
     printf("%s%s%s\n", prefix, separator, line);
