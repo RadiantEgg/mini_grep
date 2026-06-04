@@ -23,14 +23,19 @@ void process_file(Config *cfg, char *filename)
         lineno++;
 
         if (match_line(cfg, line) == 1) {
-            if (cfg->count_only == 1) 
-                count++;
-            else 
+            switch (cfg->mode) {
+            case MODE_PRINT:
                 output_line(cfg, filename, lineno, line);            
+                break;            
+            case MODE_COUNT:
+                count++;
+                break;
+            }
         }
     }
 
-    printf("%d\n", count);
+    if (cfg->mode == MODE_COUNT)
+        printf("%d\n", count);
     
     fclose(fp);
 }

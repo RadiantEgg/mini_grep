@@ -19,7 +19,7 @@ void parse_args(int argc, char **argv, Config *cfg)
                     cfg->ignore_case = 1;
                     break;
                 case 'c':
-                    cfg->count_only = 1;
+                    cfg->mode = MODE_COUNT;
                     break;
                 default:
                     printf("find: illegal option %c\n", c);
