@@ -9,6 +9,7 @@ typedef struct {
     int number;
     int except;
     int ignore_case;
+    int count_only;
     char *pattern;
 
     char **files;

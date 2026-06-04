@@ -10,6 +10,7 @@ void process_file(Config *cfg, char *filename)
 {
     char line[MAX_LINE_LENGTH];
     long lineno = 0;
+    int count = 0;
 
     FILE *fp = fopen(filename, "r");
     if (!fp) {
@@ -21,9 +22,15 @@ void process_file(Config *cfg, char *filename)
     while (fgets(line, sizeof(line), fp)) {
         lineno++;
 
-        if (match_line(cfg, line) == 1) 
-            output_line(cfg, filename, lineno, line);
+        if (match_line(cfg, line) == 1) {
+            if (cfg->count_only == 1) 
+                count++;
+            else 
+                output_line(cfg, filename, lineno, line);            
+        }
     }
+
+    printf("%d\n", count);
     
     fclose(fp);
 }
