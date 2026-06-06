@@ -3,6 +3,7 @@
 
 #include "config.h"
 
+// 按行匹配
 int match_line(Config *cfg, char *line);
 
 #endif

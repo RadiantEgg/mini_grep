@@ -17,7 +17,8 @@ APP_SRC = \
 	src/file.c \
 	src/match.c \
 	src/config.c \
-	src/output.c
+	src/output.c \
+	src/input.c
 
 APP_OBJ = $(APP_SRC)
 
